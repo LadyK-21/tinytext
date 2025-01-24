@@ -1,4 +1,4 @@
-from hypothesis_auto import auto_pytest_magic  # type: ignore[import]
+from __future__ import annotations
 
 import tinytext
 
@@ -13,4 +13,12 @@ def test_something() -> None:
     assert tiny == "ᶦᶰᵗᵒ ᵗᶦᶰᶦᵉʳ ᵗᵉˣᵗ"
 
 
-auto_pytest_magic(tinytext.tinytext)
+def test_for_digits() -> None:
+    # Arrange
+    numbers = "9876543210"
+
+    # Act
+    tiny: str = tinytext.tinytext(numbers)
+
+    # Assert
+    assert tiny == "⁹⁸⁷⁶⁵⁴³²¹⁰"
