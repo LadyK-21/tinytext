@@ -50,16 +50,11 @@ scripts.tinytext = "tinytext.cli:main"
 
 [tool.hatch]
 version.source = "vcs"
-
-[tool.hatch.build.hooks.vcs]
-version-file = "src/tinytext/_version.py"
-
-[tool.hatch.version.raw-options]
-local_scheme = "no-local-version"
+version.raw-options.local_scheme = "no-local-version"
+build.hooks.vcs.version-file = "src/tinytext/_version.py"
 
 [tool.ruff]
 fix = true
-
 lint.extend-select = [
   "C4",     # flake8-comprehensions
   "EM",     # flake8-errmsg
@@ -97,17 +92,15 @@ max_supported_python = "3.15"
 minversion = "9.0"
 testpaths = [ "tests" ]
 
-[tool.coverage.run]
-omit = [
-  "**/__main__.py",
-  "**/cli.py",
-]
-
-[tool.coverage.report]
+[tool.coverage]
 # Regexes for lines to exclude from consideration
-exclude_also = [
+report.exclude_also = [
   # Don't complain if non-runnable code isn't run:
   "if __name__ == .__main__.:",
+]
+run.omit = [
+  "**/__main__.py",
+  "**/cli.py",
 ]
 
 [tool.mypy]
